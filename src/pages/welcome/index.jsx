@@ -9,6 +9,10 @@ class IndexPage extends React.Component {
     super();
   }
 
+  componentDidMount() {
+
+  }
+
   render() {
     return (
       <div className="normal">
