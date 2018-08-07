@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Button } from 'antd-mobile';
+import _ from 'lodash';
 import './index.less';
+
+console.log(_,'===lodash====');
 
 
 class IndexPage extends React.Component {
@@ -19,7 +22,21 @@ class IndexPage extends React.Component {
         <h1 className="title">Yay! Welcome to dva!!</h1>
         <div className="welcome" />
         <ul className="list">
-          <Button className='btn-button'>按钮</Button>
+          <Button type='primary' onClick={() => {
+                if(navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(
+                      function (position) {  
+                          var longitude = position.coords.longitude;  
+                          var latitude = position.coords.latitude;  
+                          alert(longitude);
+                          console.log(longitude)
+                          console.log(latitude)
+                          
+              
+                      }
+                    ) 
+                 }
+          }} className='btn-button'>按钮</Button>
         </ul>
       </div>
     );
