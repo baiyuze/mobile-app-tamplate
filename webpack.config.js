@@ -153,7 +153,7 @@ let config = {
 
  // 提供静态服务
   devServer:{ 
-    port: 8001,
+    port: 8002,
     historyApiFallback: true,
     headers: { // 添加头部信息
       "X-Custom-Foo": "bar"
@@ -163,19 +163,14 @@ let config = {
     host: ip,
     // https: true,
     before(app) { 
-      apiMocker(app, path.resolve('./mock/api.mock.js'),{
-        proxy: {
-          '/repos/*': 'https://api.github.com/',
-        },
-        changeHost: true,
-      })
+      apiMocker(app, path.resolve('./mock/api.mock.js'))
     },
-    // proxy: { // 请求代理
-    //   "/api": {
-    //     target: "",
-    //     pathRewrite: { '^/api': '' }
-    //   },
-    // }
+    proxy: { // 请求代理
+      "/api": {
+        target: "http://192.168.0.129:8081",
+        pathRewrite: { '^/api': '' }
+      },
+    }
   }
 
 }
